@@ -103,6 +103,7 @@ static Key keys[] = {
 {0,                             XF86XK_AudioLowerVolume,  spawn, {.v = voldn }},
 {0,                             XF86XK_AudioMute,         spawn, {.v = voltoggle }},
 {0,                             XF86XK_Favorites,         spawn, {.v = (const char*[]){ "i3lock", "--color=282828",  NULL } }},
+	{ 0,				XK_Print,	spawn,		SHCMD("maim ~/Resimler/ekran/pic-full-$(date '+%y%m%d-%H%M-%S').png") },
 { MODKEY,                       XK_b,      togglebar,      {0} },
 { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

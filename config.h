@@ -100,6 +100,7 @@ static Key keys[] = {
 { MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD("org.telegram.desktop") },
 { MODKEY,                       XK_c,      spawn,          SHCMD("discord") },
 { MODKEY,                       XK_x,      spawn,          SHCMD("thunderbird")},
+{ MODKEY,                       XK_z,      spawn,          TUICMD("lf") },
 /* vol/brightness */
 {0,                             XF86XK_MonBrightnessUp,   spawn, {.v = blup }},
 {0,                             XF86XK_MonBrightnessDown, spawn, {.v = bldn }},

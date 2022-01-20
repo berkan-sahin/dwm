@@ -7,15 +7,15 @@ static const int swallowfloating    = 0;        /* 1 means swallow floating wind
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "CaskaydiaCove Nerd Font Mono:size=12:antialias=true:autohint=true",
-"Mononoki:size=9:antialias=true:autohint=true",
-"Hack:size=8:antialias=true:autohint=true",
+"Mononoki:size=12:antialias=true:autohint=true",
+"Hack:size=12:antialias=true:autohint=true",
 "JoyPixels:size=10:antialias=true:autohint=true" };
 static const char dmenufont[]       = "CaskaydiaCove Nerd Font Mono:size=12";
 static const char col_gray1[]       = "#282828";
 static const char col_gray2[]       = "#504945";
 static const char col_gray3[]       = "#edbbb2";
 static const char col_gray4[]       = "#edbbb2";
-static const char col_cyan[]        = "#689d6a";
+static const char col_cyan[]        = "#458588";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
@@ -88,14 +88,18 @@ static Key keys[] = {
 /* modifier                     key        function        argument */
 /* program shortcuts */
 { MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
-{ MODKEY|ShiftMask,             XK_space,  spawn,          {.v = roficmd } },
+{ MODKEY|ControlMask,           XK_space,  spawn,          {.v = roficmd } },
 { MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 { MODKEY,			            XK_w,	   spawn,	       {.v = ffcmd} },
 { MODKEY,			            XK_e,	   spawn,	       {.v = emacscmd} },
+{ MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD("codium")},
 { MODKEY,                       XK_a,      spawn,          TUICMD("gotop") },
 { MODKEY|ShiftMask,             XK_a,      spawn,          TUICMD("pulsemixer") },
 { MODKEY,                       XK_s,      spawn,          TUICMD("ncmpcpp") },
-{ MODKEY|ShiftMask,             XK_s,      spawn,          TUICMD("cmus") },
+{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("mcg") },
+{ MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD("org.telegram.desktop") },
+{ MODKEY,                       XK_c,      spawn,          SHCMD("discord") },
+{ MODKEY,                       XK_x,      spawn,          SHCMD("thunderbird")},
 /* vol/brightness */
 {0,                             XF86XK_MonBrightnessUp,   spawn, {.v = blup }},
 {0,                             XF86XK_MonBrightnessDown, spawn, {.v = bldn }},
@@ -103,7 +107,8 @@ static Key keys[] = {
 {0,                             XF86XK_AudioLowerVolume,  spawn, {.v = voldn }},
 {0,                             XF86XK_AudioMute,         spawn, {.v = voltoggle }},
 {0,                             XF86XK_Favorites,         spawn, {.v = (const char*[]){ "i3lock", "--color=282828",  NULL } }},
-	{ 0,				XK_Print,	spawn,		SHCMD("maim ~/Resimler/ekran/pic-full-$(date '+%y%m%d-%H%M-%S').png") },
+{0,				                XK_Print,                 spawn, SHCMD("maim ~/Resimler/ekran/pic-full-$(date '+%y%m%d-%H%M-%S').png") },
+{0,                             XF86XK_Display,           spawn, SHCMD("mpc toggle")},
 { MODKEY,                       XK_b,      togglebar,      {0} },
 { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

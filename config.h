@@ -69,19 +69,6 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 /* programs */
 static const char *roficmd[] = { "rofi", "-show", "drun", NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
-static const char *ffcmd[] = { "firefox", NULL };
-static const char *emacscmd[] = { "emacs", NULL };
-
-/* brigthness/vol etc. */
-static const char *blup[] = { "xbacklight", "+10", NULL };
-static const char *bldn[] = { "xbacklight", "-10", NULL };
-static const char *volup[] = { "pulsemixer", "--change-volume", "+5", NULL };
-static const char *voldn[] = { "pulsemixer", "--change-volume", "-5", NULL };
-static const char *voltoggle[] = {"pulsemixer", "--toggle-mute", NULL };
-
-
-/*static const char *muscmd[] */
-
 #include <X11/XF86keysym.h>
 
 static Key keys[] = {
@@ -90,9 +77,9 @@ static Key keys[] = {
 { MODKEY,                       XK_space,  spawn,          {.v = dmenucmd } },
 { MODKEY|ControlMask,           XK_space,  spawn,          {.v = roficmd } },
 { MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-{ MODKEY,			            XK_w,	   spawn,	       {.v = ffcmd} },
-{ MODKEY,			            XK_e,	   spawn,	       {.v = emacscmd} },
-{ MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD("codium")},
+{ MODKEY,			            XK_w,	   spawn,	       SHCMD("firefox") },
+{ MODKEY,			            XK_e,	   spawn,	       SHCMD("emacs") },
+{ MODKEY|ShiftMask,             XK_e,      spawn,          SHCMD("codium") },
 { MODKEY,                       XK_a,      spawn,          TUICMD("gotop") },
 { MODKEY|ShiftMask,             XK_a,      spawn,          TUICMD("pulsemixer") },
 { MODKEY,                       XK_s,      spawn,          TUICMD("ncmpcpp") },
@@ -102,13 +89,14 @@ static Key keys[] = {
 { MODKEY,                       XK_x,      spawn,          SHCMD("thunderbird")},
 { MODKEY,                       XK_z,      spawn,          TUICMD("lf") },
 /* vol/brightness */
-{0,                             XF86XK_MonBrightnessUp,   spawn, {.v = blup }},
-{0,                             XF86XK_MonBrightnessDown, spawn, {.v = bldn }},
-{0,                             XF86XK_AudioRaiseVolume,  spawn, {.v = volup }},
-{0,                             XF86XK_AudioLowerVolume,  spawn, {.v = voldn }},
-{0,                             XF86XK_AudioMute,         spawn, {.v = voltoggle }},
+{0,                             XF86XK_MonBrightnessUp,   spawn, SHCMD("xbacklight +5")},
+{0,                             XF86XK_MonBrightnessDown, spawn, SHCMD("xbacklight -5")},
+{0,                             XF86XK_AudioRaiseVolume,  spawn, SHCMD("pamixer -i5")},
+{0,                             XF86XK_AudioLowerVolume,  spawn, SHCMD("pamixer -d5")},
+{0,                             XF86XK_AudioMute,         spawn, SHCMD("pamixer -t")},
 {0,                             XF86XK_Favorites,         spawn, {.v = (const char*[]){ "i3lock", "--color=282828",  NULL } }},
 {0,				                XK_Print,                 spawn, SHCMD("maim ~/Resimler/ekran/pic-full-$(date '+%y%m%d-%H%M-%S').png") },
+{MODKEY,				        XK_Print,                 spawn, SHCMD("maimpick") },
 {0,                             XF86XK_Display,           spawn, SHCMD("mpc toggle")},
 { MODKEY,                       XK_b,      togglebar,      {0} },
 { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
